@@ -1,0 +1,54 @@
+.red {
+    border: 1px solid red;
+}
+
+.blue {
+    border: 1px solid blue;
+}
+
+.yellow {
+    border: 1px solid yellow;
+}
+
+.Register-container{
+    background-color: #f0f2f5;
+    min-height: 100vh;  
+    padding-top: 20px;
+    .content-right{
+        border: 1px solid red($color: #000000);
+        border-radius: 8px;
+        background-color: #ffff;
+        box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+        box-sizing: border-box;
+
+        .forgot-password{
+            text-decoration: none;
+            cursor: pointer;
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+
+        .brand{
+            color: #1877f2;
+            font-size: 20px;
+            text-transform: uppercase;
+            font-weight: 600;
+            text-align: center;
+        }
+    }
+
+    .content-left{
+        margin-top: 50px;
+        .brand{
+            color: #1877f2;
+            font-size: 30px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .detail{
+            font-size: 20px;
+        }
+    }
+}
