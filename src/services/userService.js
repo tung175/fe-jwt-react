@@ -11,3 +11,11 @@ export const LoginService = (valueLogin, password) => {
         valueLogin, password
     })
 }
+
+export const fetchAllUser = () => {
+    return axios.get('http://localhost:8080/api/v1/user/read')
+}
+
+export const fetchAllUserWithPaginate = (page, limit) => {
+    return axios.get(`http://localhost:8080/api/v1/user/read?page=${page}&limit=${limit}`)
+}

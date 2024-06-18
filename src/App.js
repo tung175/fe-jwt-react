@@ -1,40 +1,29 @@
-import logo from "./logo.svg";
 // import "./App.scss";
-
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
-import Login from "./components/Login/Login";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router } from "react-router-dom";
 import Nav from "./components/navigation/Nav";
-import Register from "./components/Register/Register";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import Users from "./components/ManageUser/Users";
+import { ToastContainer } from "react-toastify";
+import AppRoutes from "./routers/AppRoutes";
+import { useState, useEffect } from "react";
 
 function App() {
+  const [account, setAccount] = useState({})
+
+  useEffect(() => {
+    let session = sessionStorage.getItem('account')
+
+    if (session) {
+      setAccount(JSON.parse(session))
+    }
+  },[])
+
   return (
     <>
       <Router>
+        <div className="app-header">
+          <Nav />
+        </div>
         <div className="app-container">
-          {/* <Nav /> */}
-          <Switch>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/register">
-              <Register />
-            </Route>
-            <Route path="/users">
-              <Users />
-            </Route>
-            <Route path="*">
-              {/* <NotFound /> */}
-              404
-            </Route>
-          </Switch>
+          <AppRoutes/>
         </div>
         <ToastContainer
           position="top-right"
