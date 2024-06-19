@@ -35,12 +35,12 @@ const Users = () => {
     // let res = await fetchAllUser(currentPage, currentLimit);
     let res = await fetchAllUserWithPaginate(currentPage, currentLimit);
 
-    if (res && res.data && res.data.EC === 0) {
-      setTotalPages(res.data.DT.totalPages);
-      setListUsers(res.data.DT.users);
-      toast.success(res.data.EM);
+    if (res && res.EC === 0) {
+      setTotalPages(res.DT.totalPages);
+      setListUsers(res.DT.users);
+      toast.success(res.EM);
     } else {
-      toast.error(res.data.EM);
+      toast.error(res.EM);
     }
   };
 
@@ -61,12 +61,12 @@ const Users = () => {
 
   const handleConfirmDelete = async () => {
     let res = await deleteUser(dataModal);
-    if (res && res.data && res.data.EC === 0) {
-      toast.success(res.data.EM);
+    if (res && res.EC === 0) {
+      toast.success(res.EM);
       await fetchUsers();
       setIsShowModalDelete(false);
     } else {
-      toast.error(res.data.EM);
+      toast.error(res.EM);
     }
   };
 
