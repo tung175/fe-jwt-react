@@ -1,10 +1,12 @@
 import { useHistory } from "react-router-dom";
 import "./Login.scss";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { toast } from "react-toastify";
 import { LoginService } from "../../services/userService";
+import { UserContext } from "../../context/UserContext";
 
 const Login = (props) => {
+  const {loginContext} = useContext(UserContext)
   const defaultObjValidInput = {
     isValidLogin: true,
     isValidPassword: true,
@@ -38,15 +40,18 @@ const Login = (props) => {
 
     let res = await LoginService(valueLogin, password)
     if (res  && res.EC === 0) {
+      let {groupWithRoles, email, username, access_token} = res.DT
+      
       let data = {
         isAuthenticated: true,
-        token: "fake token"
+        access_token,
+        account: {groupWithRoles, email, username}
       }
 
-      sessionStorage.setItem('account', JSON.stringify(data))
+      loginContext(data)
       toast.success(res.EM)
+      localStorage.setItem("jwt", access_token)
       history.push('/users')
-      window.location.reload()
     } else {
       toast.error(res.EM)
     }
@@ -57,15 +62,6 @@ const Login = (props) => {
       handleLogin()
     }
   }
-
-  useEffect(() => {
-    let session = sessionStorage.getItem('account')
-
-    if (session) {
-      history.push('/')
-      window.location.reload()
-    }
-  },[])
 
   return (
     <>
